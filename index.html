@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>360 Hello Kitty Garden</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #000; }
+        #viewer-container { width: 100%; height: 100vh; cursor: move; }
+    </style>
+</head>
+<body>
 
+    <div id="viewer-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="https://p2u.github.io/panolens.js/build/panolens.min.js"></script>
+
+    <script>
+        const container = document.querySelector('#viewer-container');
+        
+        // Aapki image ka exact naam
+        const panorama = new PANOLENS.ImagePanorama('hello_kitty_garden_360_equirectangular.jpg');
+
+        const viewer = new PANOLENS.Viewer({
+            container: container,
+            autoRotate: false,         // Finger se ghumane ke liye ise false rakha hai
+            controlBar: false,        // Full screen saaf dikhega
+            enableReticle: false      // Center point hata diya
+        });
+
+        viewer.add(panorama);
+
+        // Mobile touch fix: Isse finger movement smooth ho jayegi
+        viewer.enableControl(PANOLENS.CONTROLS.ORBIT);
+    </script>
+</body>
+</html>
